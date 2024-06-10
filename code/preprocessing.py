@@ -1,16 +1,13 @@
 import pandas as pd
 
-def check_postcodes(df: pd.DataFrame, postcode_column: str = 'postcode') -> pd.DataFrame:
+def check_postcodes(df: pd.DataFrame, postcode_column: str = 'postcode'):
     """
-    This function checks if the 'postcode' column in a DataFrame has only 5 digit values 
-    and attempts to convert non-compliant values to integers (assuming they are wrongly formatted strings).
+    This function checks if the 'postcode' column in a DataFrame contains non-numeric values or
+    has only 5 digit values.
 
     Args:
         df (pandas.DataFrame): The DataFrame containing the 'postcode' column.
         postcode_column (str, optional): The name of the column containing postcodes. Defaults to 'postcode'.
-
-    Returns:
-        pandas.DataFrame: The DataFrame with the 'postcode' column potentially transformed to integers.
     """
 
     # Check if data type is object
@@ -24,7 +21,7 @@ def check_postcodes(df: pd.DataFrame, postcode_column: str = 'postcode') -> pd.D
     # Filter for invalid lengths (not 5 digits)
     invalid_length = df[postcode_column].str.len() != 5
 
-    # Print informative message
+    # Print informative messages
     if non_numeric_postcodes.any():
         print(f"Found {non_numeric_postcodes.sum()} postcodes with non-numeric values in column '{postcode_column}'.")
     else:
@@ -36,5 +33,3 @@ def check_postcodes(df: pd.DataFrame, postcode_column: str = 'postcode') -> pd.D
         print(f"Found {invalid_length.sum()} postcodes with invalid length (not 5 digits) in column '{postcode_column}'.")
     else:
         print(f"All postcodes in column '{postcode_column}' have valid length (5 digits).")
-
-    return df
