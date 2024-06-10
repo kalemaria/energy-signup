@@ -1,5 +1,26 @@
 import pandas as pd
 
+def remove_floating_points_in_postcodes(df: pd.DataFrame, postcode_column: str = 'postcode') -> pd.DataFrame:
+    """
+    Removes trailing decimal points (".0") from postcode values in a DataFrame.
+
+    Args:
+        df (pd.DataFrame): The DataFrame containing the 'postcode' column.
+        postcode_column (str, optional): The name of the column containing postcodes. Defaults to 'postcode'.
+
+    Returns:
+        pd.DataFrame: A new DataFrame with ".0" removed from postcode values.
+    """
+
+    # Check if data type is object
+    if df[postcode_column].dtype != 'object':
+        print(f"Postcode column '{postcode_column}' is not of object type, skipping formatting.")
+        return df
+    
+    df_clean = df.copy()
+    df_clean[postcode_column] = df_clean[postcode_column].apply(lambda x: x.strip('.0'))
+    return df_clean
+
 def check_postcodes(df: pd.DataFrame, postcode_column: str = 'postcode'):
     """
     This function checks if the 'postcode' column in a DataFrame contains non-numeric values or
