@@ -54,3 +54,27 @@ def check_postcodes(df: pd.DataFrame, postcode_column: str = 'postcode'):
         print(f"Found {invalid_length.sum()} postcodes with invalid length (not 5 digits) in column '{postcode_column}'.")
     else:
         print(f"All postcodes in column '{postcode_column}' have valid length (5 digits).")
+
+
+def convert_order_date_to_datetime(df: pd.DataFrame, order_date_column: str = 'order_date') -> pd.DataFrame:
+    """
+    Converts the 'order_date' column in a DataFrame to datetime format.
+
+    This function assumes the 'order_date' column contains date strings in a format that can be parsed by pandas.to_datetime.
+
+    Args:
+        df (pd.DataFrame): The DataFrame containing the 'order_date' column.
+        order_date_column (str, optional): The name of the column containing order dates. Defaults to 'order_date'.
+
+    Returns:
+        pd.DataFrame: A new DataFrame with the 'order_date' column converted to datetime format.
+    """
+    
+    # Check if data type is object
+    if df[order_date_column].dtype != 'object':
+        print(f"Order date column '{order_date_column}' is not of object type, skipping conversion.")
+        return df
+    
+    df_clean = df.copy()
+    df_clean['order_date'] = pd.to_datetime(df_clean['order_date'])
+    return df_clean
