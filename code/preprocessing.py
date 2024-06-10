@@ -1,6 +1,6 @@
 import pandas as pd
 
-def check_and_transform_postcode(df: pd.DataFrame, postcode_column: str = 'postcode') -> pd.DataFrame:
+def check_postcodes(df: pd.DataFrame, postcode_column: str = 'postcode') -> pd.DataFrame:
     """
     This function checks if the 'postcode' column in a DataFrame has only 5 digit values 
     and attempts to convert non-compliant values to integers (assuming they are wrongly formatted strings).
