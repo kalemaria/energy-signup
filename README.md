@@ -24,6 +24,7 @@ I read in the data using Pandas read_csv() function into a DataFrame object, did
 * There seem to be misspellings withing the 'original_product_name' categories, e.g. 'E.ON STROM' and 'E.ON STROM 24 [...] 24', 'E.ON STROM ÖKO' and 'E.ON STROM ÖO'.
 * There are 29532 rows with missing 'bundesland' values. It should be possible to impute the correct states from postcodes (after cleaning that column), but will require mapping data.
 * There are 0.09% extraordinaty high 'total_bonus' values above 380(€?), with a peak around 400. The minimal value is 0, mean value is 149 and maximal value of 570. Domain knowledge is required in order to decide if they are outliers that should be removed for modeling.
+* There are 232 (~0.07%) duplicated rows.
 
 While working of the first issue, I found two more issues:
 
